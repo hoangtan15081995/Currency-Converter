@@ -13,8 +13,8 @@ const BASE_URL =`https://v6.exchangerate-api.com/v6/${API_KEY}`
      console.log(error);
      return [];
    }
- }
-//  getSupportedCodes().then((result)=> console.log(result));
+ };
+
 async function getConversionRate(baseCode, targetCode) {
   try {
     const response = await fetch(`${BASE_URL}/pair/${baseCode}/${targetCode}`);
@@ -22,13 +22,12 @@ async function getConversionRate(baseCode, targetCode) {
        const data = await response.json();
        const rate = data["conversion_rate"];
        return rate;
-  }
- } catch(error) {
+     }
+  } catch(error) {
     console.log(error);
     return 0;
-  }
-}
-// getConversionRate("VND", "USD").then((result)=> console.log(result));
+    }
+};
 
 const baseUnit = document.querySelector("#base-unit");
 const targetRate = document.querySelector("#target-rate");
@@ -52,13 +51,14 @@ const updateExchangeRate = async () => {
     errorMsg.textContent = "Cannot get the conversion rate";
     return;
   };
-    errorMsg.textContent = "";
+  errorMsg.textContent = "";
 
-    const baseName = supportedCodes.find(code =>code[0] === baseCode)[1];
-    const targetName = supportedCodes.find(code =>code[0] === targetCode)[1];
-    baseUnit.textContent = `1 ${baseName} equals`;
-    targetRate.textContent =`${conversionRate} ${targetName}`;
-}
+  const baseName = supportedCodes.find(code =>code[0] === baseCode)[1];
+  const targetName = supportedCodes.find(code =>code[0] === targetCode)[1];
+  baseUnit.textContent = `1 ${baseName} equals`;
+  targetRate.textContent =`${conversionRate} ${targetName}`;
+};
+
 const initialize = async () => {
   errorMsg.textContent = "Loading data..";
   supportedCodes = await getSupportedCodes();
@@ -67,17 +67,16 @@ const initialize = async () => {
     return;
   };
     errorMsg.textContent = "";
-    // console.log(supportedCodes);
 
   supportedCodes.forEach((code) => {
-  const baseOption = document.createElement("option");
-  baseOption.value = code[0];
-  baseOption.textContent = code[1];
-  selectBaseCode.appendChild(baseOption);
-  const targetOption = document.createElement("option");
-  targetOption.value = code[0];
-  targetOption.textContent = code[1];
-  selectTargetCode.appendChild(targetOption);
+    const baseOption = document.createElement("option");
+    baseOption.value = code[0];
+    baseOption.textContent = code[1];
+    selectBaseCode.appendChild(baseOption);
+    const targetOption = document.createElement("option");
+    targetOption.value = code[0];
+    targetOption.textContent = code[1];
+    selectTargetCode.appendChild(targetOption);
 });
   selectBaseCode.value = "VND";
   selectTargetCode.value = "USD"
