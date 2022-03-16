@@ -8,6 +8,20 @@
   <link rel="stylesheet" href="currencyconverter.css">
 </head>
 <body>
+  <div class="container">
+    <h1>Currency Converter</h1>
+    <div class="exchange-rate">
+      <div id="base-unit"></div>
+      <div id="target-rate"></div>
+    </div>
+    <div class="input-group">
+      <input type="number" id="base-amount" class="input-box">
+      <select class="select-box" id="base-code"></select>
+      <input type="number" id="target-amount" class="input-box">
+      <select class="select-box" id="target-code"></select>
+    </div>
+    <p class="error-message"></p>
+  </div>
   <script src="currencyconverter.js"></script>
 </body>
 </html>
